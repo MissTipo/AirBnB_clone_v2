@@ -11,7 +11,7 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
     # cities = relationship('City')
-    cities = relationship('City', backref='state')
+    cities = relationship('City', cascade="all, delete", backref='state')
    # user = relationship("User", back_populates="addresses")
 
 

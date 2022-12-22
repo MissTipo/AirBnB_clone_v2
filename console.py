@@ -132,10 +132,10 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[class_args]()
 
         # print(args[2])
-        kw_args = {}
+        # kw_args = {}
         d = len(args)
         for j in range(1, d):
-            # argd[j] = name="california"
+            # argd[j] = name="california" longitude=-122.431297
             param_list = args[j].split("=")  # ["name", "Californuia"]
 
             if ('"' in param_list[1]):

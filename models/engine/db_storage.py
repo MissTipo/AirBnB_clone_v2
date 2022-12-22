@@ -9,7 +9,7 @@ from models.city import City
 
 from models.user import User
 from models.place import Place
-# from models.amenity import Amenity
+from models.amenity import Amenity
 from models.review import Review
 
 
@@ -46,7 +46,8 @@ class DBStorage():
                 'City': City,
                 'User': User,
                 'Place': Place,
-                'Review': Review}
+                'Review': Review,
+                'Amenity': Amenity}
             for key, value in classes.items():
                 # print("Here")
                 objct = self.__session.query(value).all()

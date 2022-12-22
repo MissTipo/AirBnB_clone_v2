@@ -1,36 +1,48 @@
 #!/usr/bin/env bash
+# Write a Bash script that sets up your web servers for the deployment of web_static
 
-#sudo apt-get upadate
-#sudo apt-get install nginx
+#install nginx
+sudo apt-get update -y
+sudo apt-get install nginx -y
 
-sudo ufw allow 'Nginx HTTP'
+#create neccessary folders
+if [ -d "/data/web_static/shared/" ]
+then
+	echo "/data/web_static/shared/ already exist"
+else
+	sudo mkdir -p '/data/web_static/shared/'
+fi
 
-sudo mkdir -p /data/web_static/releases/test /data/web_static/shared/
+if [ -d "/data/web_static/releases/test" ]
+then
+        echo "/data/web_static/releases/test already exist"
+else
+        sudo mkdir -p '/data/web_static/releases/test'
+fi
 
-#adding a test string
+if [ -f "/data/web_static/releases/test/index.html" ]
+then
+        echo "/data/web_static/releases/test/index.html already exist"
+else
+        sudo touch '/data/web_static/releases/test/index.html'
+fi
 
-echo "<h2> welcome </h2>" > /data/web_static/releases/test/index.html
+# index.html message
+sudo echo "Welcome, this is $(hostname) server" |sudo tee /data/web_static/releases/test/index.html
 
-echo "
-server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+# creates symbolic link
+#if [ -d "/data/web_static/current" ]
+#then
+#	sudo rm -rf "/data/web_static/current already exist"
+#fi
 
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-        error_page 404 /404.html;
-        location = /404.html {
-                internal;
-        }
-        location /redirect_me {
-                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-        location /hbnb_static {
-                alias /data/web_static/current/;
-        }
+# ownership
+sudo chown -hR ubuntu:ubuntu /data/
 
-}" | sudo tee /etc/nginx/sites-available/default
+# configuration to serve the content
+sudo sed -i "19i\ \n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-enabled/default
 
-sudo ln -sf /data/web_static/releases/test /data/web_static/current
-sudo chown -hR ubuntu:ubuntu /data
+# restart nginx server
+sudo service nginx restart

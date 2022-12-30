@@ -4,17 +4,18 @@ Fabric script that generates a .tgz archive from the contents of the
 web_static folder using the function do_pack
 """
 
-from fabric.api import local
+from fabric.api import *
 from datetime import datetime
+# env.hosts = ["54.90.55.176"]
 
 
 def do_pack():
     """generates a .tgz archive from the contents of the web_static"""
-    run('mkdir -p versions')
-    time= datetime.now().strftime("%Y%m%d%H%M%S")
-    name = "webs_tatic_{}.tgx".format(time)
+    local('mkdir -p versions')
+    time = datetime.now().strftime("%Y%m%d%H%M%S")
+    name = "web_static_{}.tgz".format(time)
     fname = "versions/{}".format(name)
-    archive_path = local("tar -cvzf {} webstatic/".format(fname))
+    archive_path = local("tar -cvzf {} web_static/".format(fname))
     if archive_path:
         return (archive_path)
     else:

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 A script that distributes an archive to your web servers,
 using the function do_deploy
@@ -25,13 +26,14 @@ def do_deploy(archive_path):
     file = file_name.split('.')[0]
     # Create a subdirectory
     run('mkdir -p /data/web_static/releases/{}'.format(file))
-    tf = /tmp/{}
-    run('tar -xzf tf -C /data/web_static/releases/{}'.format(file_name, file))
+    # tf = '/tmp/{}'
+    run('tar -xzf /tmp/{} -C /data/web_static/releases/{}'
+        .format(file_name, file))
     # delete the uploaded .tgz archive from the /tmp/ directory on the
     run('rm /tmp/{}'.format(file_name))
-    des = /data/web_static/releases/{}
-    run('mv des/web_static/* ' 'des'.format(file, file))
+    # des = '/data/web_static/releases/{}'
+    run('mv /data/web_static/releases/{}/web_static/* '
+        '/data/web_static/releases/{}'.format(file, file))
     run('rm -rf /data/web_static/current')
-    releases = /data/web_static/releases/{}/
-    current = /data/web_static/current
-    run("ln -s releases current".format(file))
+    run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
+        .format(file))

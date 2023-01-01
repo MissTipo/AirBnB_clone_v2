@@ -16,6 +16,7 @@ def do_deploy(archive_path):
     """
     if not archive_path:
         return False
+
     # Upload the archive to the /tmp/ directory of the web server
     with cd('/tmp'):
         upload = put(archive_path, '/tmp/')
@@ -26,12 +27,11 @@ def do_deploy(archive_path):
     file = file_name.split('.')[0]
     # Create a subdirectory
     run('mkdir -p /data/web_static/releases/{}'.format(file))
-    # tf = '/tmp/{}'
     run('tar -xzf /tmp/{} -C /data/web_static/releases/{}'
         .format(file_name, file))
     # delete the uploaded .tgz archive from the /tmp/ directory on the
     run('rm /tmp/{}'.format(file_name))
-    # des = '/data/web_static/releases/{}'
+
     run('mv /data/web_static/releases/{}/web_static/* '
         '/data/web_static/releases/{}'.format(file, file))
     run('rm -rf /data/web_static/current')

@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+A script that distributes an archive to your web servers,
+using the function do_deploy
+"""
+
 """if archive_path == NULL:
     return False
 
@@ -15,7 +20,10 @@ env.hosts = ['54.90.55.176', '54.144.155.28']
 
 
 def do_deploy(archive_path):
-    if not archive_path:
+    """
+    distributes an archive to your web servers,
+    using the function do_deploy if not archive_path:
+    """
         return False
     # Upload the archive to the /tmp/ directory of the web server
     with cd('/tmp'):
@@ -34,5 +42,3 @@ def do_deploy(archive_path):
             '/data/web_static/releases/{}'.format(file, file))
     run('rm -rf /data/web_static/current')
     run("ln -s /data/web_static/releases/{}/ /data/web_static/current".format(file))
-    """run('ln -s /data/web_static/releases/{}/ 
-    /data/web_static/current'.format(file))"""

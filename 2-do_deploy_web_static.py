@@ -33,7 +33,7 @@ def do_deploy(archive_path):
     run('rm /tmp/{}'.format(file_name))
 
     run('mv -u /data/web_static/releases/{}/web_static/* '
-     '/data/web_static/releases/{}'.format(file, file))
+        '/data/web_static/releases/{}'.format(file, file))
     run('rm -rf /data/web_static/current')
     run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
         .format(file))

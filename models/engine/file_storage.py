@@ -1,6 +1,7 @@
-#!/usr/bin/python3
+#!/usr/biupdaten/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+# from datetime import datetime
 
 
 class FileStorage:
@@ -64,3 +65,6 @@ class FileStorage:
         if (obj in FileStorage.__objects.values()): # Returns a list of values in __object
             key = obj.__class__.__name__ + "." + obj.id
             del (FileStorage.__objects[key])
+
+    def close(self):
+        self.reload()

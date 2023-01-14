@@ -28,9 +28,13 @@ class State(BaseModel, Base):
             from models import storage
             related_cities = []
 
-            cities = storage.all(City) # gets the entire storage- a dictionary
-            for key,value in cities.items(): # cities.value returns list of the city objects
-                if value.state_id == self.id: # if the object.state_id == self.id
-                    related_cities.append(value) # append to the cities list
+            cities = storage.all(City)
+            # gets the entire storage- a dictionary
+            for key, value in cities.items():
+                # cities.value returns list of the city objects
+                if value.state_id == self.id:
+                    # if the object.state_id == self.id
+                    related_cities.append(value)
+                    # append to the cities list
             return related_cities
         # state = relationship('State')

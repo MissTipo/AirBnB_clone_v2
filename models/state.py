@@ -20,11 +20,10 @@ class State(BaseModel, Base):
     else:
         @property
         def cities(self):
-
-            '''returns the list of City instances with state_id
-                equals the current State.id
-                FileStorage relationship between State and City
-        '''
+            """
+            returns the list of City instances with state_id
+            equals the current State.id
+            """
             from models import storage
             related_cities = []
 

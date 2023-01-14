@@ -1,48 +1,54 @@
 #!/usr/bin/python3
-# A script that starts a Flask web application
-
-from flask import render_template, Flask
-
+""" Starts a Flask web application """
+from flask import Flask
+from flask import render_template
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
-def index():
-    """Function that prints Hello HBNB"""
+def hello_hbn():
+    """ Returns Hello HBNB! from 0.0.0.0:5000 """
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
-def index_hbnb():
-    """Function that prints Hello HBNB"""
+def hbnb():
+    """ Returns HBNB from 0.0.0.0:5000/hbnb """
     return "HBNB"
 
+
 @app.route('/c/<text>', strict_slashes=False)
-def index_c(text):
-    """Function that prints Hello HBNB"""
-    text = text.replace("_", " ")
+def c_route(text):
+    """ Returns C followed by the value of text """
+    text = text.replace('_', ' ')
     return "C {}".format(text)
 
-@app.route('/python/', strict_slashes=False, defaults={'text':'is cool'})
 
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def index_python(text):
-    """Function that prints Hello HBNB"""
-    text = text.replace("_", " ")
+def python_route(text="is cool"):
+    """ Returns Python followed by the vale of the text """
+    text = text.replace('_', ' ')
     return "Python {}".format(text)
 
+
 @app.route('/number/<int:n>', strict_slashes=False)
-def index_number(n):
-    """Function that prints Hello HBNB"""
-    return "{:d} is a number".format(n)
+def number_route(n):
+    """ Returns n is a number if n is an integer """
+    return "{} is a number".format(n)
+
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def index_number_template(n):
-    """Function that prints Hello HBNB"""
-    return render_template('5-number.html', num=n)
+def number_template(n):
+    """ Returns an HTML page only if n is an integer """
+    return render_template("5-number.html", n=n)
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def index_number_template(n):
-    """Function that prints Hello HBNB"""
-    return render_template('6-number_odd_or_even.html', num=n)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_old_or_even(n):
+    """ Returns an HTML page only if the n is an integer """
+    return render_template("6-number_odd_or_even.html", n=n)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

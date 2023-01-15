@@ -19,6 +19,9 @@ def list_of_states():
 
 
 @app.teardown_appcontext
-def tear_down(exception=None):
+def tear_down(exception):
     """Removes the current SQLAlchemy Session"""
     storage.close()
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)

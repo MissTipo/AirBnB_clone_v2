@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-""" Starts a Flask web application """
+""" Starts a Flask web application taht listens on 0.0.0.0, port 5000 """
 from flask import Flask
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_hbn():
-    """ Return Hello HBNB! from 0.0.0.0:5000 """
+def hello_hbnb():
+    """Dispayss Hello HBNB!"""
     return "Hello HBNB!"
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)

@@ -3,7 +3,7 @@
 Starts a Flask web application that listens on 0.0.0.0, port 5000
 """
 from flask import *
-from models.__init__ import storage
+from models import storage
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def list_of_states():
     """Displays a HTML page with the list of all State objects"""
     states = storage.all('State').values()
     # states = sorted(states, key=lambda x x.name)
-    states= sort(attribute='state.name')
+    # states= sort(attribute='state.name')
     return render_template('7-states_list.html', states=states)
 
 
@@ -24,4 +24,4 @@ def tear_down(exception):
     storage.close()
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050)

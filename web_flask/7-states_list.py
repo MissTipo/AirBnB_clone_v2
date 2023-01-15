@@ -8,7 +8,7 @@ from models import storage
 app = Flask(__name__)
 
 
-#@app.route('/states_list/<value>', strict_slashes=False)
+# @app.route('/states_list/<value>', strict_slashes=False)
 @app.route('/states_list', strict_slashes=False)
 def list_of_states():
     """Displays a HTML page with the list of all State objects"""
@@ -22,6 +22,7 @@ def list_of_states():
 def tear_down(exception):
     """Removes the current SQLAlchemy Session"""
     storage.close()
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5050)

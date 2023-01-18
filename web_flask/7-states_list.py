@@ -9,17 +9,12 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
-@app.teardown_appcontext
-def tear_down(self):
-    """Removes the current SQLAlchemy Session"""
-    storage.close()
-
-
 @app.route('/states_list')
 def list_of_states():
     """Displays a HTML page with the list of all State objects"""
     states = storage.all('State')
     return render_template('7-states_list.html', states=states)
+
 
 @app.teardown_appcontext
 def tear_down(self):

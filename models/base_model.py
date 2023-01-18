@@ -31,8 +31,11 @@ class BaseModel:
                 if (k == 'created_at'):
                     kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
-                if (k == '__class__'):
-                    del kwargs['__class__']
+                # if (k == '__class__'):
+                    # del kwargs['__class__']
+
+            if ("__class__" in kwargs.keys()):
+                del kwargs["__class__"]
             if 'id' not in kwargs.keys():
                 self.id = str(uuid.uuid4())
                 self.created_at = datetime.now()

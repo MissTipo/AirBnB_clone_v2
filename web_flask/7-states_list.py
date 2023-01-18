@@ -4,7 +4,6 @@ Starts a Flask web application that listens on 0.0.0.0, port 5000
 """
 from flask import *
 from models import storage
-from models.state import State
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
